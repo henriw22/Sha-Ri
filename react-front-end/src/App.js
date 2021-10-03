@@ -4,9 +4,7 @@ import Canvas from "./components/Canvas/Canvas";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <Canvas />
-      </header>
+      <Canvas />
     </div>
   );
 }
