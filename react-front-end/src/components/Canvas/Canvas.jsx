@@ -11,19 +11,27 @@ function Canvas(props) {
   const [showPopUp, setShowPopUp] = useState(false);
   const [x, setX] = useState();
   const [y, setY] = useState();
+  const [event, setEvent] = useState();
 
-  const clickHandler = (e) => {
+  const addEventHandler = (e) => {
     setShowPopUp(true);
     setX(e.clientX);
     setY(e.clientY);
   };
 
+  const editEventHandler = (eventId) => {
+    const event = eventCtx.events.find((event) => event.id === eventId);
+    setShowPopUp(true);
+    setEvent(event);
+  };
+
   const CloseHandler = () => {
     setShowPopUp(false);
+    setEvent();
   };
 
   const allEvents = eventCtx.events.map((event) => {
-    return <Event key={event.id} event={event} />;
+    return <Event key={event.id} event={event} onEdit={editEventHandler} />;
   });
 
   return (
@@ -31,12 +39,14 @@ function Canvas(props) {
       {showPopUp && (
         <EventForm
           onSubmit={eventCtx.addEvent}
+          onUpdate={eventCtx.updateEvent}
           coordinate={{ x, y }}
           onClose={CloseHandler}
+          event={event}
         />
       )}
-      <div onClick={clickHandler} className={classes.container}>
-        <img src={aurora} alt="aurora" />
+      <div className={classes.container}>
+        <img src={aurora} alt="aurora" onClick={addEventHandler} />
         {allEvents}
       </div>
     </Fragment>
