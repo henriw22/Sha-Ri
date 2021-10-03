@@ -1,0 +1,17 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.fileUploader {
+  display: flex;
+  flex-direction: row;
+}
+
+.fileUploader img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin: 10px;
+}
